@@ -31,7 +31,56 @@ class AlexFluxonium(BaseQubit):
     Inherits `BaseQubit` class.
 
     Description:
+    Simple Metal Fluxonium in a pocket object. Creates the pocket, the pads made by 2 triangles in front of each other, the Josephson junction between the pads and a Josephson junction array in the rest of the space in the pocket, closing the loop. You can set if you want to close the loop in the left or right side of the pocket.
+    
+    You can add a pad to connect a readout resonator if you set the option 'make_readout' to True in the dictionary 'readout_line_options'.
 
+    Default Options:
+        Convention: Values (unless noted) are strings with units included, (e.g., '30um')
+        # General
+        * pos_x -          x position of the center of the pocket
+        * pos_y -          y position of the center of the pocket
+        * orientation -    rotation of the pocket
+        * chip -           name of the chip where the pocket will be placed
+        # Pocket
+        * pocket_width -   width of the pocket
+        * pocket_height -  height of the pocket
+        # Pads
+        * pad_position -   position of the pads, can be 'left' or 'right'. The jj array will be placed in the opposite side of the pads
+        * pad_width_max -  maximum width of the pads (the width at the base of the triangle)
+        * pad_width_min -  minimum width of the pads (the width at the top of the triangle)
+        * pad_height -     height of the pads (the height of the triangle)
+        # Josephson Junction
+        * jj_width -       width of the Josephson junction
+        * jj_height -      height of the Josephson junction
+        * L_j -            inductance of the Josephson junction
+        * C_j -            capacitance of the Josephson junction
+        # JJ array
+        * jj_array_width - width of the JJ array
+        * jj_array_lenght - length of the JJ array (total length of the array)
+        * jj_array_gnd_gap - gap between the JJ array and the ground (gap between the jj array and the pocket)
+        * jj_array_min_gap - minimum gap between the segments of the JJ array
+        * jj_array_start_gap - gap between the pad and the start of the JJ array
+        * jj_array_start_pad_height - height of the pad at the start of the JJ array (base of the jj array conector)
+        * jj_array_start_pad_width - width of the pad at the start of the JJ array (base of the jj array conector)
+        * L_jj -           inductance of the JJ array
+        * C_jj -           capacitance of the JJ array
+        * gds_cell_jj_array - name of the gds cell for the JJ array
+        # Readout line options
+        * readout_line_options - dictionary with the options for the readout line
+            * make_readout - (Boolean) If True, adds a readout resonator pad
+            * pad_sep -      separation between the readout pads
+            * pad_gap -      gap between the readout pad and the background
+            * pad_width -    width of the readout pad
+            * pad_height -   height of the readout pad
+            * cpw_width -    width of the readout line (wire to connect the pad)
+            * cpw_gap -      gap of the readout line
+
+    .. image::
+    fluxonium_alex.png
+    
+    .. meta::
+        Fluxonium Pocket (Alex)
     """
 
     component_metadata = Dict(short_name='FluxoniumPocket',
@@ -238,6 +287,7 @@ class AlexFluxonium(BaseQubit):
                                     (end_jj_pad.centroid.x - p.jj_array_start_pad_width/2 + p.jj_array_width/2, 
                                     end_jj_pad.centroid.y- p.jj_array_start_pad_height/2)])
         
+        # BUG when you try to create a jj_array in this manner, then the electromagnetics simulation fail.
         # Now we can create the JJ array, which is a list of segments
         # jj_array_coords_h = []
         
