@@ -5,7 +5,7 @@ dependencies:
   - python>=3.9
   - addict==2.4.0
   - descartes==1.1.0
-  # - gdspy==1.6.12
+  - gdspy==1.6.12
   - geopandas==0.12.2
   - ipython==8.10.0
   - matplotlib==3.7.0
@@ -27,4 +27,3 @@ dependencies:
   - pip:
       - pyaedt==0.6.46
       - gmsh==4.11.1
-      - gdspy==1.6.12
