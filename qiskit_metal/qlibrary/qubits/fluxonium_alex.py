@@ -12,9 +12,19 @@
 # copyright notice, and modified files need to carry a notice indicating
 # that they have been altered from the originals.
 
-# This class was created by Maximiliano Gatto (5 Jun. 2025) and is based on the class of Figen YILMAZ, Christian Kraglund Andersen for FloxoniumPocket. This class represent the design that Alex drew.
+"""Fluxonium Pocket (Alex design).
 
-"""Fluxonium Pocket (Alex)"""
+Developed by Maximiliano Gatto for Bariloche Quantum Circuits Group, CAB, CNEA, Argentina as a student of Balseiro Institute.
+
+This qubit was designed by Alex for his thesis project. I adapted the design to make it parametric and compatible with Qiskit Metal.
+
+
+It is based on the class of Figen YILMAZ, Christian Kraglund Andersen for FloxoniumPocket.
+
+For any questions please contact:
+    maxigatto.mg@gmail.com
+"""
+
 
 from operator import length_hint
 import numpy as np
@@ -23,7 +33,7 @@ from math import *
 from qiskit_metal.draw.basic import buffer
 from qiskit_metal.qlibrary.core import BaseQubit
 import copy
-from shapely.geometry import GeometryCollection
+# from shapely.geometry import GeometryCollection
 
 class AlexFluxonium(BaseQubit):
     """The base `AlexFluxonium` class.
@@ -31,6 +41,32 @@ class AlexFluxonium(BaseQubit):
     Inherits `BaseQubit` class.
 
     Description:
+        This class creates a fluxonium qubit in a pocket with a Josephson junction and a Josephson junction array. The qubit has two pads that are connected to the junctions. The pads can have different widths and heights. The junctions are represented as lines with a given width, inductance and capacitance. The junction array is represented as a line with a given width and length. The junction array is made of N segments, where N is determined by the length of the array and the width of the segments. The gap between the segments is also determined by the length of the array and the width of the segments. The junction array is connected to the pads by two small pads. The qubit can also have a readout resonator connected to one of the pads.
+        
+    Options:
+        pos_x: x position of the component.
+        pos_y: y position of the component.
+        orientation: orientation angle of the component.
+        chip: name of the chip where the component is placed.
+        pocket_width: width of the pocket.
+        pocket_height: height of the pocket.
+        pad_position: position of the pads (left or right).
+        pad_width_max: maximum width of the pads.
+        pad_width_min: minimum width of the pads.
+        pad_height: height of the pads.
+        jj_width: width of the Josephson junction.
+        jj_height: height of the Josephson junction.
+        L_j: inductance of the Josephson junction.
+        C_j: capacitance of the Josephson junction.
+        jj_array_width: width of the Josephson junction array segments.
+        jj_array_lenght: total length of the Josephson junction array.
+        jj_array_gnd_gap: gap between the Josephson junction array and the ground plane.
+        jj_array_min_gap: minimum gap between the segments of the Josephson junction array.
+        jj_array_start_gap: gap between the pads and the start of the Josephson junction array.
+        jj_array_start_pad_height: height of the small pads that connect the junction array to the main pads.
+        jj_array_start_pad_width: width of the small pads that connect the junction array to the main pads.
+        L_jj: inductance of each segment of the Josephson junction array.
+        readout_line_options: dictionary with options for the readout resonator (make_readout, pad_sep, pad_gap, pad_width, pad_height, cpw_width, cpw_gap).
 
     """
 
