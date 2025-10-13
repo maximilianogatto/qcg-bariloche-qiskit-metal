@@ -12,9 +12,19 @@
 # copyright notice, and modified files need to carry a notice indicating
 # that they have been altered from the originals.
 
-# This class was created by Maximiliano Gatto (5 Jun. 2025) and is based on the class of Figen YILMAZ, Christian Kraglund Andersen for FloxoniumPocket. This class represent the design that Alex drew.
+"""Fluxonium Pocket (Alex design).
 
-"""Fluxonium Pocket (Alex)"""
+Developed by Maximiliano Gatto for Bariloche Quantum Circuits Group, CAB, CNEA, Argentina as a student of Balseiro Institute.
+
+This qubit was designed by Alex for his thesis project. I adapted the design to make it parametric and compatible with Qiskit Metal.
+
+
+It is based on the class of Figen YILMAZ, Christian Kraglund Andersen for FloxoniumPocket.
+
+For any questions please contact:
+    maxigatto.mg@gmail.com
+"""
+
 
 from operator import length_hint
 import numpy as np
@@ -23,7 +33,7 @@ from math import *
 from qiskit_metal.draw.basic import buffer
 from qiskit_metal.qlibrary.core import BaseQubit
 import copy
-from shapely.geometry import GeometryCollection
+# from shapely.geometry import GeometryCollection
 
 class AlexFluxonium(BaseQubit):
     """The base `AlexFluxonium` class.
