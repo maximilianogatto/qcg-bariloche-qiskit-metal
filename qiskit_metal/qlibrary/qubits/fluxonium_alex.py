@@ -292,36 +292,37 @@ class AlexFluxonium(BaseQubit):
         # print(f"Number of segments: {N}, Length of each segment: {l}, Gap between segments: {gamma}")
         
         # We represent the JJ array as a line that connects the start and end pads
-        jj_array = draw.LineString([(start_jj_pad.centroid.x - p.jj_array_start_pad_width/2 + p.jj_array_width/2, 
-                                    start_jj_pad.centroid.y + p.jj_array_start_pad_height/2), 
-                                    (end_jj_pad.centroid.x - p.jj_array_start_pad_width/2 + p.jj_array_width/2, 
-                                    end_jj_pad.centroid.y- p.jj_array_start_pad_height/2)])
+        # UNCOMENT THIS LINE FOR SIMULATIONS
+        # jj_array = draw.LineString([(start_jj_pad.centroid.x - p.jj_array_start_pad_width/2 + p.jj_array_width/2, 
+        #                             start_jj_pad.centroid.y + p.jj_array_start_pad_height/2), 
+        #                             (end_jj_pad.centroid.x - p.jj_array_start_pad_width/2 + p.jj_array_width/2, 
+        #                             end_jj_pad.centroid.y- p.jj_array_start_pad_height/2)])
         
         # BUG when you try to create a jj_array in this manner, then the electromagnetics simulation fail.
         # Now we can create the JJ array, which is a list of segments
-        # jj_array_coords_h = []
+        jj_array_coords_h = []
         
-        # # store pair of points in each iteration
-        # jj_array_coords_h.append((pc_b[0] - p.jj_array_start_pad_width, pc_b[1] + p.jj_array_start_gap + p.jj_array_start_pad_height/2))
-        # jj_array_coords_h.append((pc_b[0] - p.jj_array_start_pad_width - l, pc_b[1] + p.jj_array_start_gap + p.jj_array_start_pad_height/2))
+        # store pair of points in each iteration
+        jj_array_coords_h.append((pc_b[0] - p.jj_array_start_pad_width, pc_b[1] + p.jj_array_start_gap + p.jj_array_start_pad_height/2))
+        jj_array_coords_h.append((pc_b[0] - p.jj_array_start_pad_width - l, pc_b[1] + p.jj_array_start_gap + p.jj_array_start_pad_height/2))
         
-        # print(jj_array_coords_h)
-        # # points to store the new
-        # ps_old = jj_array_coords_h[0]
-        # pe_old = jj_array_coords_h[1]
+        print(jj_array_coords_h)
+        # points to store the new
+        ps_old = jj_array_coords_h[0]
+        pe_old = jj_array_coords_h[1]
         
-        # for i in range(2, 2*N, 2):   # we start from 1 because the first segment is already added
-        #     # translate the points
-        #     pe_new = (ps_old[0], ps_old[1] +gamma + p.jj_array_width)
-        #     ps_new = (pe_old[0], pe_old[1] + gamma + p.jj_array_width)
+        for i in range(2, 2*N, 2):   # we start from 1 because the first segment is already added
+            # translate the points
+            pe_new = (ps_old[0], ps_old[1] +gamma + p.jj_array_width)
+            ps_new = (pe_old[0], pe_old[1] + gamma + p.jj_array_width)
 
-        #     jj_array_coords_h.append(ps_new)
-        #     jj_array_coords_h.append(pe_new)
+            jj_array_coords_h.append(ps_new)
+            jj_array_coords_h.append(pe_new)
             
-        #     ps_old = ps_new
-        #     pe_old = pe_new
+            ps_old = ps_new
+            pe_old = pe_new
 
-        # jj_array = draw.LineString(jj_array_coords_h)
+        jj_array = draw.LineString(jj_array_coords_h)
 
         
         # define the first horizontal segment
